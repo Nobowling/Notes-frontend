@@ -20,17 +20,18 @@ class App extends React.Component {
     event.preventDefault()
     const noteObject = {
       content: this.state.newNote,
-      date: new Date().new,
-      important: Math.random() > 0.5,
-      id: this.state.notes.length + 1
+      date: new Date(),
+      important: Math.random() > 0.5
     }
 
-    const notes = this.state.notes.concat(noteObject)
-
-    this.setState({
-      notes,
-      newNote: ''
-    })
+    axios
+      .post('http://localhost:3001/notes', noteObject)
+      .then(response => {
+        this.setState({
+          notes: this.state.notes.concat(response.data),
+          newNote: ''
+        })
+      })
   }
 
   componentWillMount() {

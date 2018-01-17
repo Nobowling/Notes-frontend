@@ -17,6 +17,18 @@
       "content": "HTTP-protokollan tärkeimmät metodit ovat GET ja POST",
       "date": "2017-12-10T19:20:14.298Z",
       "important": true
+    },
+    {
+      "content": "REST-apissa uuden resurssin luominen tapahtuu HTTP POST -pyynnöllä",
+      "date": "2018-01-17T08:48:54.930Z",
+      "important": false,
+      "id": 4
+    },
+    {
+      "content": "uusi toimii",
+      "date": "2018-01-17T08:50:52.093Z",
+      "important": false,
+      "id": 5
     }
   ]
 }
