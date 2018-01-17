@@ -6,8 +6,13 @@ class App extends React.Component {
     super(props)
     this.state = {
       notes: props.notes,
-      newNote: 'uusi muistiinpano...'
+      newNote: '',
+      showAll: true
     }
+  }
+
+  toggleVisible = () => {
+    this.setState({ showAll: !this.state.showAll })
   }
 
   addNote = (event) => {
@@ -33,11 +38,23 @@ class App extends React.Component {
   }
 
   render() {
+    const notesToShow =
+      this.state.showAll ?
+        this.state.notes :
+        this.state.notes.filter(note => note.important === true)
+
+    const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
+
     return (
       <div>
         <h1>Muistiinpanot</h1>
+        <div>
+          <button onClick={this.toggleVisible}>
+            näytä {label}
+          </button>
+        </div>
         <ul>
-          {this.state.notes.map(note => <Note key={note.id} note={note} />)}
+          {notesToShow.map(note => <Note key={note.id} note={note} />)}
         </ul>
         <form onSubmit={this.addNote}>
           <input 
