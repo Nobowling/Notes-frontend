@@ -10,7 +10,10 @@ class App extends React.Component {
       notes: [],
       newNote: '',
       showAll: true,
-      error: null
+      error: null,
+      username: '',
+      password: '',
+      user: null
     }
   }
 
@@ -68,9 +71,25 @@ class App extends React.Component {
     }
   }
 
-  handleNoteChange = (event) => {
-    console.log(event.target.value)
-    this.setState({ newNote: event.target.value })
+  login = (e) => {
+    e.preventDefault()
+    console.log('login in with', this.state.username, this.state.password)
+  }
+
+  handleNoteChange = (e) => {
+    this.setState({ new_note: e.target.value })
+  }
+
+  handlePasswordChange = (e) => {
+    this.setState({ password: e.target.value })
+  }
+
+  handleUsernameChange = (e) => {
+    this.setState({ username: e.target.value })
+  }
+
+  toggleVisible = () => {
+    this.setState({ showAll: !this.state.showAll })
   }
 
   render() {
@@ -84,6 +103,41 @@ class App extends React.Component {
     return (
       <div>
         <h1>Muistiinpanot</h1>
+
+        <Notification message={this.state.error} />
+
+        <h2>Kirjaudu</h2>
+
+        <form onSubmit={this.login}>
+          <div>
+            käyttäjätunnus
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={this.handleUsernameChange}
+            />
+          </div>
+          <div>
+            salasana
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+            />
+          </div>
+          <button>kirjaudu</button>
+        </form>
+
+        <h2>Luo uusi muistiinpano</h2>
+
+        <form onSubmit={this.addNote}>
+          <input
+            value={this.state.newNote}
+            onChange={this.handleNoteChange}
+          />
+          <button type="submit">tallenna</button>
+        </form>
+
         <Notification message={this.state.error} />
         <div>
           <button onClick={this.toggleVisible}>
@@ -98,13 +152,7 @@ class App extends React.Component {
               toggleImportance={this.toggleImportanceOf(note.id)}
             />)}
         </ul>
-        <form onSubmit={this.addNote}>
-          <input 
-            value={this.state.newNote} 
-            onChange={this.handleNoteChange}
-          />
-          <button type="submit">tallenna</button>
-        </form>
+
       </div>
     )
   }
