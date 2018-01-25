@@ -24,6 +24,13 @@ class App extends React.Component {
       .then(notes => {
         this.setState({ notes })
       })
+
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      this.setState({ user })
+      noteService.setToken(user.token)
+    }    
   }
 
   toggleVisible = () => {
@@ -80,6 +87,8 @@ class App extends React.Component {
         password: this.state.password
       })
 
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
+      noteService.setToken(user.token)
       this.setState({ username: '', password: '', user })
     } catch (exception) {
       this.setState({
@@ -92,7 +101,7 @@ class App extends React.Component {
   }
 
   handleNoteChange = (event) => {
-    this.setState({ new_note: event.target.value })
+    this.setState({ newNote: event.target.value })
   }
 
   handleLoginFieldChange = (event) => {
@@ -145,7 +154,7 @@ class App extends React.Component {
 
         <form onSubmit={this.addNote}>
           <input
-            value={this.state.new_note}
+            value={this.state.newNote}
             onChange={this.handleNoteChange}
           />
           <button>tallenna</button>
