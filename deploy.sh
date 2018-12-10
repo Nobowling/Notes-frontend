@@ -1,3 +1,6 @@
 #!/bin/sh
 npm run build
-cp -r build ../../osa3/notebackend/
+rm -rf ../../GitHub Clones/notesbackendi/build
+cp -r build ../../GitHub\ Clones/notesbackendi/
+
+chmod u+x deploy.sh
