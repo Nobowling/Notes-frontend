@@ -10,7 +10,7 @@ class Togglable extends React.Component {
   }
 
   toggleVisibility = () => {
-    this.setState({ visible: !this.state.visible })
+    this.setState({visible: !this.state.visible})
   }
 
   render() {
@@ -30,7 +30,6 @@ class Togglable extends React.Component {
     )
   }
 }
-
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 }

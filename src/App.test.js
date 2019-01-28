@@ -5,7 +5,7 @@ import Note from './components/Note'
 jest.mock('./services/notes')
 import noteService from './services/notes'
 
-describe('<App />', () => {
+describe.skip('<App />', () => {
   let app
   beforeAll(() => {
     app = mount(<App />)

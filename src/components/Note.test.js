@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import Note from './Note'
 
-describe.only('<Note />', () => {
+describe.skip('<Note />', () => {
   it('renders content', () => {
     const note = {
       content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
@@ -10,7 +10,10 @@ describe.only('<Note />', () => {
     }
 
     const noteComponent = shallow(<Note note={note} />)
+    console.log(noteComponent.debug())
+
     const contentDiv = noteComponent.find('.content')
+    console.log(contentDiv.debug())
 
     expect(contentDiv.text()).toContain(note.content)
   })
@@ -20,19 +23,19 @@ describe.only('<Note />', () => {
       content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
       important: true
     }
-
+  
     const mockHandler = jest.fn()
-
+  
     const noteComponent = shallow(
       <Note
         note={note}
         toggleImportance={mockHandler}
       />
     )
-
+  
     const button = noteComponent.find('button')
     button.simulate('click')
-
+  
     expect(mockHandler.mock.calls.length).toBe(1)
-  })  
+  })
 })
